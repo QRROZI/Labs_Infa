@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# $1 - Суффикс, $2 - полное имя директории
+
+if [ "$#" -ne 2 ]
+then
+echo "Неверный вызов скрипта (необходимое количество аргументов - 2)"
+exit 1
+fi
+
+rename(){
+mv "$file" "${file%%.*}_$1.${file##*.}"
+}
+
+cd "$2"
+for file in *
+do
+	if [ -f "$file" ]
+	then
+	rename "$1"
+	fi
+done
